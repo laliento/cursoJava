@@ -1,0 +1,29 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>LOGIN</title>
+        <f:metadata>
+		    <f:viewAction action="#{loginView.irPagina}" />
+		    <!-- <f:event type="preRenderView" listener="#{loginView.irPagina}"/> -->
+		</f:metadata>
+    </h:head>
+    <h:body onload="document.f.app_username.focus();">
+                <h3>Inicio de sesión</h3>
+                <font color="red">
+		     <h:outputLabel value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/>
+                </font>
+         
+		<form name="f" action="${request.contextPath}/appLogin" method="POST">
+			<h:outputLabel value="Enter UserName:" />
+			<input type="text" name="app_username"/><br/><br/>
+			<h:outputLabel value="Enter Password:" />
+			<input type="password" name="app_password"/> <br/><br/>
+			<INPUT id="remember_me" name="remember_me" type="checkbox"/>
+			<LABEL for="remember_me" class="inline">Recordarme</LABEL>			
+			<input type="submit" value="Login"/>
+			<h:outputLabel rendered="false">Parte de abajo sirve para evitar xss</h:outputLabel>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>			
+		</form>
+    </h:body>
+</html>  
