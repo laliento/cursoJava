@@ -15,7 +15,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ComponentScan(basePackages = {"com.lalo.base.view","com.lalo.base.bi","com.lalo.base.dao"})// por default toma el paquete donde está ubicada ésta clase
+@ComponentScan(basePackages = {"com.lalo.base.view","com.lalo.base.bi","com.lalo.base.dao"})// por default toma el paquete donde estï¿½ ubicada ï¿½sta clase
 @EnableTransactionManagement
 public class ConfigSpring {
 
@@ -60,7 +60,7 @@ public class ConfigSpring {
 		return hibernateTransactionManager;
 	}
 	
-	//bean que ayuda al manejo de excepciones para la anotación @Repository Spring pag. 341
+	//bean que ayuda al manejo de excepciones para la anotaciï¿½n @Repository Spring pag. 341
 	@Bean
 	public BeanPostProcessor persistenceTraslation(){
 		return new PersistenceExceptionTranslationPostProcessor();
@@ -74,7 +74,7 @@ public class ConfigSpring {
 				setProperty("hibernate.dialect",
 						"org.hibernate.dialect.MySQLDialect");
 				setProperty("hibernate.show_sql", "false");
-				setProperty("hibernate.hbm2ddl.auto", "validate");//update(pasa los cambios de hibernate a la BD),validate(sólo valida)
+				setProperty("hibernate.hbm2ddl.auto", "validate");//update(pasa los cambios de hibernate a la BD),validate(sï¿½lo valida)
 				setProperty("hibernate.generate_statistics", "false");
 				setProperty("hibernate.cfg.formatSQL", "false");
 				setProperty("hibernate.cfg.useSqlComments", "false");

@@ -54,3 +54,5 @@ local.properties
 .scala_dependencies
 .worksheet
 
+/BaseProyectoWeb/src.main.java/com/lalo/config/springHibernate/ConfigSecurity.java
+/BaseProyectoWeb/src.main.java/com/lalo/config/springHibernate/ConfigSpring.java
