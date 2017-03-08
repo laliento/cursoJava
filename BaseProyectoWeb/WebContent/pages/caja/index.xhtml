@@ -1,0 +1,381 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link type="text/css" rel="stylesheet" href="./css/default.css" />
+</h:head>
+
+<ui:composition template="/pages/util/template/template.xhtml">
+	<ui:define name="head">
+        <style type="text/css">
+            .jqplot-target, .jqplot-axis {
+                color: #9fadb5;
+            }
+            
+            .circulo {
+            	Border-radius: 50%;
+				Border: 5px solid rgba(255,29,37,0.5);
+				Background: #FFFFFF;
+				Font: 500 18px/21px Helvetica, sans-serif;
+				Color: #FFFFFF;
+				Text-align: center;
+            }
+        </style>
+    </ui:define>
+    
+    <ui:define name="content">
+    	<!-- SECTION 1 -->
+    	<h:form>
+         <p:dialog header="#{languageView.bundleMap['lbl_validacion_pediente']}" widgetVar="dlg2" modal="true" height="50"
+         showEffect="explode" hideEffect="explode" rendered="#{(!inboxView.perfilQA) and (notificationView.taskNumber != 0) }" >
+		    <li class="Fleft BordRadHalf TexAlCenter" style="width: 200px; margin: 0 auto;">
+    			<i class="icon-bell"></i>
+    			<h:commandLink value="#{notificationView.taskNumber}" action="#{inboxView.irInbox}" rendered="#{notificationView.taskNumber != 0}"
+    					style="color: #fff; font-weight: bold; text-decoration: none;" styleClass="alertBubble BordRad10 Fs9"/>
+    		</li>
+		</p:dialog> 
+        </h:form>
+
+		<h:panelGroup rendered="#{loginView.renderDashboard}">
+			<div class="Container100">
+				<div class="ContainerIndent">
+					
+					<div class="Container25 Responsive">
+						<h:form>
+							<ui:include src="../dashboard/DashboardMG.xhtml"/>
+						</h:form>
+					</div>
+					<div class="Container25 Responsive">
+						<h:form>
+							<ui:include src="../dashboard/DashboardSuperama.xhtml"/>
+						</h:form>
+					</div>
+					
+				</div>
+			</div>
+			
+			<div class="Container100">
+				<div class="ContainerIndent">
+					<div class="Container25 Responsive">
+						<h:form>
+							<ui:include src="../dashboard/DashboardSams.xhtml"/>
+						</h:form>
+					</div>
+					<div class="Container25 Responsive">
+						<h:form>
+							<ui:include src="../dashboard/DashboardG.xhtml"/>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</h:panelGroup>
+
+        <div class="Container80"><div class="ContainerIndent"><p:separator rendered="#{loginView.renderDashboard}"/></div></div>
+        
+        <h:form id="frmQAChart" rendered="#{loginView.renderDashboard}">
+			<div class="Container80" align="center">
+                    <p:selectOneMenu style="width:150px;" value="#{dashboardQAView.formatCode}">
+                        <f:selectItem itemLabel="E-Commerce" itemValue="8" />
+                        <f:selectItem itemLabel="Groceries" itemValue="1" />
+                        <f:selectItem itemLabel="Superama" itemValue="6" />
+                        <p:ajax listener="#{dashboardQAView.createRejectChart}" update="frmQAChart"></p:ajax>
+                    </p:selectOneMenu>
+	        </div>
+        
+	        <div class="Container100">
+	        	<div class="ContainerIndent">
+	                <div class="Container40 Responsive40">
+	                    <div class="ContainerIndent">
+	                        <p:panel style="min-height:400px;">
+	                            <div class="Container70 Responsive Fs20 leaden">
+	                                <i class="icon-chart-bar"></i> Validación QA
+	                            </div>
+	                            <div class="ContainerIndent">
+					         		<i class="icon-calendar"></i>	<p:commandLink value="Cambiar Rango" oncomplete="DlgDates.show()"></p:commandLink>
+					         	</div>
+	                            <div class="EmptyBox10"/>
+	                            <div class="Container100">
+	                                <p:barChart value="#{dashboardQAView.formatChart}" legendPosition="ne" seriesColors="5fba7d,93c0ff" />
+	                            </div>
+	                            <div class="EmptyBox10"></div>
+	                            <p:separator styleClass="Wid100"/>
+	                            <h:commandLink >
+	                           		<h:outputText value="Generar Reporte Completo" styleClass="DispInlBlock Fs14 Fright MarRight10 orange icon-doc-1"/>
+	                           		<p:ajax oncomplete="DlgFormats.show();"/>
+	                           	</h:commandLink>
+	                        </p:panel>
+	                    </div>
+	                </div>
+	                <div class="Container40 Responsive40">
+	                    <div class="ContainerIndent">
+	                        <p:panel style="min-height:400px;">
+	                            <div class="Container70 Responsive Fs20 leaden">
+	                                <i class="icon-doc-text"></i> Productos Rechazados QA
+	                            </div>
+	                            <div class="ContainerIndent">
+					         		<i class="icon-calendar"></i>	<p:commandLink value="Cambiar Rango" oncomplete="DlgDatesRe.show()"></p:commandLink>
+					         	</div>
+	                            <div class="EmptyBox10"/>
+	                            <div class="Container100">
+	                                <p:barChart id="chartReject" value="#{dashboardQAView.rejectChart}" legendPosition="ne" orientation="horizontal" seriesColors="df1b1b,f96603,faac34"/>
+	                            </div>
+	                            <div class="EmptyBox10"></div>
+	                            <p:separator styleClass="Wid100"/>
+	                            <p:commandLink actionListener="#{dashboardQAView.buildFullReportRejectQA}" ajax="false">
+	                           		<h:outputText value="Generar Reporte Completo" styleClass="DispInlBlock Fs14 Fright MarRight10 orange icon-doc-1"/>
+	                           		<p:fileDownload value="#{dashboardQAView.reporteQAStreamedContent}" />
+	                           	</p:commandLink>
+	                        </p:panel>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	 	</h:form>
+	 	
+        
+        <h:panelGroup rendered="#{loginView.renderDashboard}">
+        <div class="Container100 ">
+            <div class="ContainerIndent">
+                
+                <div class="Container100"><div class="ContainerIndent"><h:outputText value="Productos más vendidos" styleClass="FontBold Fs20 hardblue"></h:outputText></div></div>
+                
+                <div class="Container25 Responsive">
+                    <div class="ContainerIndent">
+                        <p:panel style="min-height: 300px;">
+                            <div class="Wid100 TexAlCenter Fleft">
+                            	<div class="ContainerIndent">
+                                	<div class="EmptyBox10"></div>
+                                	<img src="#{facesContext.externalContext.requestContextPath}/images/products/00040000566967s.jpg" alt="12" />
+                                    <span class="Fs20 DispBlock hardblue">TV Sony 55 Pulgadas <br/><span class="Fs12 softgray">1080p Full HD Smart TV 3D LED</span></span>
+                                </div>
+                            </div>
+                        </p:panel>
+                    </div>
+                </div>
+                
+                <div class="Container25 Responsive">
+                    <div class="ContainerIndent">
+                        <p:panel style="min-height: 300px;">
+                            <div class="Wid100 TexAlCenter Fleft">
+                                <div class="ContainerIndent">
+                                    <img src="#{facesContext.externalContext.requestContextPath}/images/products/00722122987363s.jpg" />
+                                    <div class="EmptyBox10"></div>
+                                    <span class="Fs20 DispBlock hardblue">Smartphone Samsung Galaxy S6 Edge <br/><span class="Fs12 softgray">32 GB Blanco 4G LTE</span></span>
+                                </div>
+                            </div>
+                        </p:panel>
+                    </div>
+                </div>
+                
+                <div class="Container25 Responsive">
+                    <div class="ContainerIndent">
+                        <p:panel style="min-height: 300px;">
+                            <div class="Wid100 TexAlCenter Fleft">
+                                <div class="ContainerIndent">
+                                    <img src="#{facesContext.externalContext.requestContextPath}/images/products/B0500000567008s.jpg" />
+                                    <div class="EmptyBox10"></div>
+                                    <span class="Fs20 DispBlock hardblue">Consola PS4 <br/><span class="Fs12 softgray">con Star Wars Battlefront</span></span>
+                                </div>
+                            </div>
+                        </p:panel>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        <div class="Container100 ">
+            <div class="ContainerIndent">
+            	<div class="Container75 Responsive">
+                    <div class="ContainerIndent">
+                        <p:panel>
+                            <div class="Container100 Fs20">
+                                <i class="icon-calendar"></i> Reporte de Procesos
+                            </div>
+                            <div class="EmptyBox10"></div>
+                            <p:accordionPanel multiple="false" style="width:auto;">
+                                <p:tab title="Proceso de Importación Host">
+                                	<h:panelGrid columns="2">
+                                		<h:outputText value="F. Inicio de ejecución:"/>
+                                		<p:inputText/>
+                                		<h:outputText value="F. Fin de ejecución:"/>
+                                		<p:inputText/>
+                                		<h:outputText value="Estatus:"/>
+                                		<p:inputText/>
+                                	</h:panelGrid>
+                                </p:tab>
+                                <p:tab title="Proceso de Extracción MG">
+                                	<h:panelGrid columns="2">
+                                		<h:outputText value="F. Inicio de ejecución:"/>
+                                		<p:inputText/>
+                                		<h:outputText value="F. Fin de ejecución:"/>
+                                		<p:inputText/>
+                                		<h:outputText value="Estatus:"/>
+                                		<p:inputText/>
+                                	</h:panelGrid>
+                                </p:tab>
+                                <p:tab title="Proceso de Extracción Walmart">
+                                	<h:panelGrid columns="2">
+                                		<h:outputText value="F. Inicio de ejecución:"/>
+                                		<p:inputText/>
+                                		<h:outputText value="F. Fin de ejecución:"/>
+                                		<p:inputText/>
+                                		<h:outputText value="Estatus:"/>
+                                		<p:inputText/>
+                                	</h:panelGrid>
+                                </p:tab>
+                                <p:tab title="Proceso de Extracción Superama">
+                                	<h:panelGrid columns="2">
+                                		<h:outputText value="F. Inicio de ejecución:"/>
+                                		<p:inputText/>
+                                		<h:outputText value="F. Fin de ejecución:"/>
+                                		<p:inputText/>
+                                		<h:outputText value="Estatus:"/>
+                                		<p:inputText/>
+                                	</h:panelGrid>
+                                </p:tab>
+                                <p:tab title="Proceso de Extracción SAM's">
+                                	<h:panelGrid columns="2">
+                                		<h:outputText value="F. Inicio de ejecución:"/>
+                                		<p:inputText/>
+                                		<h:outputText value="F. Fin de ejecución:"/>
+                                		<p:inputText/>
+                                		<h:outputText value="Estatus:"/>
+                                		<p:inputText/>
+                                	</h:panelGrid>
+                                </p:tab>
+                            </p:accordionPanel>
+                        </p:panel>
+                    </div>
+                </div>
+                
+                <div class="EmptyBox10" ></div>
+            </div>
+        </div>
+        </h:panelGroup>
+        
+        <h:form>
+        	
+        	<p:dialog widgetVar="DlgDates" modal="true">
+        		
+        			<h:panelGrid columns="2">
+        				<h:outputText value="F. Inicio"/>
+        				<p:calendar value="#{dashboardQAView.startDate}"/>
+        				<h:outputText value="F. Fin"/>
+        				<p:calendar value="#{dashboardQAView.endDate}"/>
+        			</h:panelGrid>
+        	
+        		<f:facet name="footer">
+        			<p:commandButton value="Aceptar" action="#{dashboardQAView.createFormatChart}" update=":frmQAChart" oncomplete="DlgDates.hide();"/>
+        			<p:commandButton value="Cancelar" oncomplete="DlgDates.hide();"> </p:commandButton>
+        		</f:facet>
+        	</p:dialog>
+        </h:form>
+        <h:form>
+        	
+        	<p:dialog widgetVar="DlgDatesRe" modal="true">
+        		
+        			<h:panelGrid columns="2">
+        				<h:outputText value="F. Inicio"/>
+        				<p:calendar value="#{dashboardQAView.startDateRe}"/>
+        				<h:outputText value="F. Fin"/>
+        				<p:calendar value="#{dashboardQAView.endDateRe}"/>
+        			</h:panelGrid>
+        	
+        		<f:facet name="footer">
+        			<p:commandButton value="Aceptar" action="#{dashboardQAView.createFormatChart}" update=":frmQAChart" oncomplete="DlgDatesRe.hide();"/>
+        			<p:commandButton value="Cancelar" oncomplete="DlgDatesRe.hide();"> </p:commandButton>
+        		</f:facet>
+        	</p:dialog>
+        </h:form>
+        <h:form id="frmFormats">
+        	<p:dialog widgetVar="DlgFormats" modal="true">
+        		
+        			<h:panelGrid columns="2">
+                        <h:outputText value="Tipo Reporte"/>
+        				<p:selectOneMenu style="width:150px;" value="#{dashboardQAView.estatusQA}">
+                            <f:selectItem itemLabel="Aceptados" itemValue="2" />
+                            <f:selectItem itemLabel="Por Validar" itemValue="1" />
+                        </p:selectOneMenu>
+        			</h:panelGrid>
+        	
+        		<f:facet name="footer">
+        			<div align="right">
+        				<p:commandButton value="#{languageView.bundleMap['btn_aceptar']}" ajax="false" 
+							actionListener="#{dashboardQAView.buildFullReportQA}"
+							onclick="DlgFormats.hide();">
+	           			 	<p:fileDownload value="#{dashboardQAView.reporteQAStreamedContent}" />
+	           			 </p:commandButton>	
+        			</div>
+        		</f:facet>
+        	</p:dialog>
+        </h:form>
+        <h:form rendered="#{(!inboxView.perfilQA) and (notificationView.taskNumber != 0) }">
+        <script>
+		    jQuery(document).ready(function() {
+		    	dlg2.show()
+		    });
+    	</script>
+    	</h:form>
+        <script>
+	        function loadChart(canvaname, percentValue, bgcolor) {
+	        	
+	        	var grayValue = 100-percentValue;
+	        	
+	            var config = {
+	                    type: 'doughnut',
+	                    data: {
+	                        datasets: [{
+	                            data: [
+	                                percentValue,
+	                                grayValue
+	                            ],
+	                            backgroundColor: [
+	                               bgcolor,
+	                                "#e6e6e6"
+	                            ],
+	                            label: 'Dataset 1'
+	                        }],
+	                        labels: [
+	                        ]
+	                    },
+	                    options: {
+	                        responsive: true,
+	                        legend: {
+	                            position: 'top',
+	                        },
+	                        title: {
+	                            display: false
+	                        },
+	                        animation: {
+	                            animateScale: true,
+	                            animateRotate: true
+	                        }
+	                    }
+	                };
+	            var ctx = document.getElementById(canvaname).getContext("2d");
+	            window.myDoughnut = new Chart(ctx, config);
+	        }
+    
+		
+		    function loadCharts() {
+		    	loadChart('chart-area-mg', '#{dashboardKPIView.ecommerce.resultInt}', '#{dashboardKPIView.ecommerce.bgcolor}');
+		    	loadChart('chart-area-superama', '#{dashboardKPIView.superama.resultInt}', '#{dashboardKPIView.superama.bgcolor}');
+		    	loadChart('chart-area-sams', '#{dashboardKPIView.sams.resultInt}', '#{dashboardKPIView.sams.bgcolor}');
+		    	loadChart('chart-area-g', '#{dashboardKPIView.groceries.resultInt}', '#{dashboardKPIView.groceries.bgcolor}');
+		    }
+		    window.onload = loadCharts();
+    	</script>
+        
+    </ui:define>
+    
+    
+</ui:composition>
+</html>

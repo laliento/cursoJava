@@ -1,0 +1,192 @@
+<ui:composition 
+	xmlns:p="http://primefaces.org/ui"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+   
+<h:form id="frmHeader">
+    <div id="layout-header" class="Unselectable fontRegular">
+    	
+        <a href="#{facesContext.externalContext.requestContextPath}/faces/pages/home/index.xhtml" id="layout-logo">
+            <h:graphicImage name="images/Walmart_Spark.png" styleClass="Fleft" library="sentinel-layout"/>
+            <span class="Fs19 FontTitilliumSemiBoldItalic Fleft"><span class="softblue">SENTINEL </span><span class="hardblue"> E-Commerce CMS</span></span>
+        </a>
+    	<ul id="sm-topmenu" class="layout-header-widgets white Fs14">
+    	
+    		<li class="Fleft BordRadHalf TexAlCenter"><i class="icon-bell"></i>
+    			<h:outputText  value="#{notificationView.taskNumber}" rendered="#{notificationView.taskNumber != 0}" style="color: #fff; font-weight: bold;" styleClass="alertBubble BordRad10 Fs9"/>
+    			<ul class="layout-header-widgets-submenu BordRad5 shadows white Animated05">
+    				<li class="Animated05">
+    					<h:commandLink value="Validación QA" action="#{inboxView.irInbox}" styleClass="icon-briefcase white" style='text-decoration: none;' rendered="#{notificationView.taskQA != 0}">
+    						<h:outputText value="(#{notificationView.taskQA})" style="font-weight: bold;" styleClass="red Fs14"></h:outputText>
+    					</h:commandLink>
+    				</li>
+    				<li class="Animated05">
+    					<h:commandLink value="Productos Importados Syncway" action="#{productsSyncView.redirectPage}" styleClass="icon-briefcase white" style='text-decoration: none;' rendered="#{notificationView.taskSyncwayImportados != 0}">
+    						<h:outputText value="(#{notificationView.taskSyncwayImportados})" style="font-weight: bold;" styleClass="red Fs14"></h:outputText>
+    						<f:setPropertyActionListener value="1" target="#{productsSyncView.fase}"/>
+    					</h:commandLink>
+    				</li>
+    				<li class="Animated05">
+    					<h:commandLink value="Productos Pendientes Syncway" action="#{productsSyncView.redirectPage}" styleClass="icon-briefcase white" style='text-decoration: none;' rendered="#{notificationView.taskSyncwayValidar != 0}">
+    						<h:outputText value="(#{notificationView.taskSyncwayValidar})" style="font-weight: bold;" styleClass="red Fs14"></h:outputText>
+    						<f:setPropertyActionListener value="2" target="#{productsSyncView.fase}"/>
+    					</h:commandLink>
+    				</li>
+    			</ul>
+    		</li>
+    		
+    	
+    		<li class="Fleft BordRadHalf TexAlCenter"><i class="icon-user-male"></i>
+    			<ul class="layout-header-widgets-submenu BordRad5 shadows white Animated05">
+					<li class="Animated05">
+						<a class="white Unselectable" style='text-decoration: none;'>
+							<i class="icon-user-male Fs26 OvHidden"></i>
+							<span class="Fs18"><h:outputText value="#{languageView.nombreUsusario}" rendered="#{languageView.rendererSelect}"/></span><br />
+						</a>
+					</li>
+					
+					<li class="Animated05" >
+						<a class="white Unselectable" style='text-decoration: none;'>
+							<h:commandLink value="Cambiar Contraseña" styleClass="icon-lock-open-alt Fs18 OvHidden white Unselectable" style='text-decoration: none;' 
+    					 			rendered="#{languageView.usua.perfil.id==18}">
+    					 		<p:ajax oncomplete="dialogChangePass.show();"></p:ajax>
+    					 	</h:commandLink>
+							
+						</a>
+					</li>
+    			</ul>
+    		</li>
+    		
+    		<li class="Fleft BordRadHalf TexAlCenter"><i class="icon-wrench-1"></i>
+    			<ul class="layout-header-widgets-submenu BordRad5 shadows white Animated05">
+    				<li>
+    				
+    				<h:panelGrid columns="2">
+    					Idioma:
+    					<h:selectOneMenu id="cmbLanguages" styleClass="header-cmb-language" value="#{languageView.idIdioma}" style="width:120px;">
+							<f:selectItems value="#{languageView.idiomaItems}"></f:selectItems>
+							<p:ajax oncomplete="dialogConfirmLanguage.show();"></p:ajax>
+						</h:selectOneMenu>
+						</h:panelGrid>
+    				</li>
+    				<li class="Animated05">
+    					<h:commandLink value=" Monitor" styleClass="icon-chart-bar white Unselectable" style='text-decoration: none;' action="#{monitorView.irPagina}"
+    					 	rendered="#{languageView.usua.perfil.id==2}"/>
+    				</li>
+    				
+    				<li class="Animated05">
+    					<p:commandLink value="#{languageView.bundleMap['mn_labels']}" action="#{labelsView.irPagina}" rendered="#{languageView.usua.perfil.id==2}"
+    									styleClass="icon-tags-1 white Unselectable" style='text-decoration: none;'/>
+    				</li>
+    				
+    				<li class="Animated05"><a href="#" class="white Unselectable TexAlRight" style='text-decoration: none;'><i class="icon-barcode"></i>#{languageView.systemVersion}</a></li>
+    			</ul>
+    		</li>
+    		
+    		<li class="Fleft BordRadHalf TexAlCenter"><i class="icon-power"></i>
+    			<ul class="layout-header-widgets-submenu BordRad5 shadows white Animated05">
+    				<li class="Animated05">
+    					<p:commandLink value="#{languageView.bundleMap['mn_logout']}" action="#{loginView.logout}" styleClass="white Unselectable icon-logout" 
+    					 style='text-decoration: none;'/>
+    				</li>
+    			</ul>
+    		</li>
+    		
+    	</ul>
+    	
+    	
+    	<!-- NEVER REMOVE FOLLOWING 'UL' TAG ! BECAUSE THIS CONTAINS RESPONSIVE MODE HEADER MENU OPEN-CLOSE BUTTON -->
+    	<ul id="sm-mobiletopmenu" class="layout-header-widgets white Fs14">
+    		<li class="Fleft BordRadHalf TexAlCenter Animated05 DisplayOnResponsive"><i class="icon-th-1"></i></li>
+    	</ul>
+    	
+    	
+    	<!-- ****** 
+    	
+    	<h:form>
+	   		<p:toolbar id="menuToolbar" binding="#{menuView.toolbar}"/>
+	    </h:form>
+	    
+	    -->
+    
+   	</div>
+   	
+</h:form>
+<p:dialog header="#{languageView.bundleMap['changeLanguage']}" widgetVar="dialogConfirmLanguage" 
+		resizable="false" draggable="false" closable="false" modal="true"
+        showEffect="clip" hideEffect="fold">
+        
+	<h:form id="frmLanguageConfirm">
+		<h:outputText value="#{languageView.bundleMap['changeLanguageQuestion']}" styleClass="label-confirm"></h:outputText>
+		<p:separator/>
+		<h:panelGrid columns="2">
+			<p:commandButton value="#{languageView.bundleMap['btn_save']}" icon="ui-icon-disk" 
+						action="#{languageView.saveLanguageSelected}"
+						oncomplete="dialogConfirmLanguage.hide(); reloadPage();" update=":frmHeader"/>
+			<p:commandButton value="#{languageView.bundleMap['btn_cancel']}" icon="ui-icon-cancel"
+						oncomplete="dialogConfirmLanguage.hide();" update=":frmHeader:cmbLanguages"/>
+		</h:panelGrid>
+	</h:form>
+</p:dialog>
+
+<p:dialog id="dlgAgregarInformacionContacto" header="#{languageView.bundleMap['loginUsername']}" widgetVar="InformacionContactoDialog" resizable="true"  
+			              showEffect="clip" hideEffect="fold" modal="true" width="350" height="150">
+	<h:form id="frmDialogInformacionContacto">    
+	    <p:messages id="msgErrorInformacionContacto"/>
+	    
+		<h:panelGrid columns="2" id="display">
+		<h:outputText value="#{propertiesFactory.bundleMap['lbl_telefono_celular']}" />
+		<p:inputMask value="#{languageView.usua.numeroCelular}" mask="(99) 9999-9999" maxlength="10" 
+					onkeypress="return validaNumeros(event)" size="30"/>
+				<h:outputText value="#{propertiesFactory.bundleMap['lbl_correo']}"/>
+				<p:inputText value="#{languageView.usua.correo}" maxlength="50" size="30">
+					<f:validator validatorId="mx.com.walmart.fyd.util.EmailValidator" />
+				</p:inputText>
+				<h:outputText value="#{propertiesFactory.bundleMap['lbl_correo_alterno']}" />
+				<p:inputText value="#{languageView.usua.correoAlterno}" maxlength="50" size="30">
+					<f:validator validatorId="mx.com.walmart.fyd.util.EmailValidator" />
+				</p:inputText>
+			</h:panelGrid>
+			<p:separator></p:separator>
+			<div align="center">
+				<h:panelGrid columns="2">
+					<p:commandButton value="#{languageView.bundleMap['lbl_cmd_save']}" update=":frmHeader,:frmDialogInformacionContacto:msgErrorInformacionContacto"   
+          				actionListener="#{languageView.guardaDatosUsuario}"/>
+          				<p:commandButton value="#{languageView.bundleMap['btn_cancelar']}" update=":frmHeader"
+          									oncomplete="InformacionContactoDialog.hide()"/>
+				</h:panelGrid>
+					
+			</div>
+	</h:form>
+</p:dialog>
+
+
+<p:dialog header="Cambiar Contraseña" widgetVar="dialogChangePass" 
+		resizable="false" draggable="false" closable="true" modal="true"
+        showEffect="clip" hideEffect="fold">
+        
+	<h:form id="frmPasswordConfirm">
+		<h:outputText value="#{languageView.bundleMap['changeLanguageQuestion']}" styleClass="label-confirm"></h:outputText>
+		
+		
+	    <h:panelGrid columns="2" id="matchGrid" cellpadding="5">                   
+	        <h:outputLabel for="pwd1" value="Contraseña: *" />
+	        <p:password id="pwd1" value="#{languageView.usua.contrasenia}" label="Contraseña" required="true" />
+	    </h:panelGrid>
+		
+		<p:separator/>
+		<div  align="right">
+		<h:panelGrid columns="2" >
+		<p:commandButton value="#{languageView.bundleMap['btn_save']}" icon="ui-icon-disk" 
+						actionListener="#{languageView.saveUserPass}"
+						oncomplete="dialogChangePass.hide();reloadPage();" update=":frmHeader"/>
+		</h:panelGrid>
+		
+		</div>
+	</h:form>
+</p:dialog>
+
+</ui:composition>

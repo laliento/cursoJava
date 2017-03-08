@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="mx.com.walmart.fyd.model.Menu" table="CAT_MENU">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" sql-type ="smallint"/>
+            <generator class="identity"/>
+        </id>
+        <property name="nombre" type="java.lang.String">
+            <column name="NOMBRE" sql-type ="nvarchar" length="30"/>
+        </property>
+        <property name="url" type="java.lang.String">
+            <column name="URL" sql-type ="nvarchar" length="50"/>
+        </property>
+        <property name="icon" type="java.lang.String">
+            <column name="ICON" sql-type ="nvarchar" length="30"/>
+        </property>
+        <property name="orderNum" type="java.lang.Integer">
+            <column name="ORDER_NUM" sql-type ="int"/>
+        </property>
+        <many-to-one name="menuPadre" class="mx.com.walmart.fyd.model.Menu">
+        	<column name="ID_MENU_PADRE" sql-type ="smallint"/>
+        </many-to-one>
+        <many-to-one name="etiqueta" class="mx.com.walmart.fyd.model.Etiqueta">
+        	<column name="ID_ETIQUETA" sql-type ="smallint"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>
