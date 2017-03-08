@@ -52,11 +52,11 @@ public class BackingBean implements Serializable{
 	@SuppressWarnings("unchecked")
 	public String getPageByUser(){
 		String pagina="login.xhtml?faces-redirect=true";
-//		if(auth == null) // se comenta para recuperar el role desde la página de login si es que ya estaba logeado se redireccione
+//		if(auth == null) // se comenta para recuperar el role desde la pï¿½gina de login si es que ya estaba logeado se redireccione
 		auth = SecurityContextHolder.getContext().getAuthentication();
 		if(auth.isAuthenticated()){
 			Collection<SimpleGrantedAuthority> authorities = (Collection<SimpleGrantedAuthority>)    auth.getAuthorities();
-			for (SimpleGrantedAuthority simpleGrantedAuthority : authorities) {//pregunta por rol cual es su página de inicio
+			for (SimpleGrantedAuthority simpleGrantedAuthority : authorities) {//pregunta por rol cual es su pï¿½gina de inicio
 				if(simpleGrantedAuthority.toString().equals("ROLE_ADMIN")){
 					pagina="/pages/admin/admin.xhtml?faces-redirect=true";
 				}
@@ -91,7 +91,7 @@ public class BackingBean implements Serializable{
 	public void loadLogger() {
 		try {
 			if(log == null){
-				//cargda la configuración desde spring desde el web.xml
+				//cargda la configuraciï¿½n desde spring desde el web.xml
 				log = Logger.getLogger(this.getClass());
 			}
 			else{
@@ -132,7 +132,7 @@ public class BackingBean implements Serializable{
 			Runtime.getRuntime().gc();
 			log.info("FIN GC.");
 		} catch (Exception e) {
-			log.error("Fallo la ejecución del GC. " + e);
+			log.error("Fallo la ejecuciï¿½n del GC. " + e);
 		}
 	}
 	public boolean isFlagErrorMsg() {

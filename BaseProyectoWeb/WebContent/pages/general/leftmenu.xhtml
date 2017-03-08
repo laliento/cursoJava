@@ -1,0 +1,118 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ps="http://primefaces.org/sentinel"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
+    
+
+	 <aside class="aside">
+         <!-- START Sidebar (left)-->
+         <aside class="aside">
+         <!-- START Sidebar (left)-->
+         <nav class="sidebar">
+            <ul class="nav">
+               <!-- START user info-->
+               <li>
+                  <div data-toggle="collapse-next" class="item user-block has-submenu">
+                     <!-- User picture-->
+                     <div class="user-block-picture">
+                        <img src="#{facesContext.externalContext.requestContextPath}/app/img/user/02.jpg" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle"/>
+                        <!-- Status when collapsed-->
+                        <div class="user-block-status">
+                           <div class="point point-success point-lg"></div>
+                        </div>
+                     </div>
+                     <!-- Name and Role-->
+                     <div class="user-block-info">
+                        <span class="user-block-name item-text">Bienvenido, <h:outputText value="#{pruebaView.sessionUser.nombre}"/></span>
+                        <span class="user-block-role"><h:outputText value="#{pruebaView.sessionUser.perfil.descripcion}"/></span>
+                        <!-- START Dropdown to change status-->
+                        <div class="btn-group user-block-status">
+                           <button type="button" data-toggle="dropdown" data-play="fadeIn" data-duration="0.2" class="btn btn-xs dropdown-toggle">
+                              <div class="point point-success"></div>Online</button>
+                           <ul class="dropdown-menu text-left pull-right">
+                              <li>
+                                 <a href="#">
+                                    <div class="point point-success"></div>Online</a>
+                              </li>
+                              <li>
+                                 <a href="#">
+                                    <div class="point point-warning"></div>Away</a>
+                              </li>
+                              <li>
+                                 <a href="#">
+                                    <div class="point point-danger"></div>Busy</a>
+                              </li>
+                           </ul>
+                        </div>
+                        <!-- END Dropdown to change status-->
+                     </div>
+                  </div>
+                  <!-- START User links collapse-->
+                  <ul class="nav collapse">
+                     <li class="divider"></li>
+                     <li>
+                     	<form action="${request.contextPath}/appLogout" method="post">
+				          <input type="submit" value="Logout" class="btn btn-oval btn-primary" />
+				          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>		
+				        </form>
+                     </li>
+                  </ul>
+                  <!-- END User links collapse-->
+               </li>
+               <!-- END user info-->
+               <!-- START Menu-->
+               <li>
+                  <a href="dashboard.html" title="Dashboard" data-toggle="collapse-next" class="has-submenu">
+                     <em class="fa fa-dashboard"></em>
+                     <div class="label label-primary pull-right">12</div>
+                     <span class="item-text">Dashboard</span>
+                  </a>
+                  <!-- START SubMenu item-->
+                  <ul class="nav collapse ">
+                     <li>
+                        <a href="dashboard.html" title="Default" data-toggle="" class="no-submenu">
+                           <span class="item-text">Default</span>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="dashboard-nosidebar.html" title="No Sidebar" data-toggle="" class="no-submenu">
+                           <span class="item-text">No Sidebar</span>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="dashboard-noprofile.html" title="No Profile" data-toggle="" class="no-submenu">
+                           <span class="item-text">No Profile</span>
+                        </a>
+                     </li>
+                  </ul>
+                  <!-- END SubMenu item-->
+               </li>
+            </ul>
+         </nav>
+         <!-- END Sidebar (left)-->
+      </aside>
+      </aside>
+	<!-- <c:forEach var="menuVar" items="#{menuView.leftMenuList}">
+					
+					<li id="sm_sentineltheme" role="menuitem">
+						<a href="#" onclick="Sentinel.toggleSubMenu(this);return false;" style="text-decoration: none;">	
+							<i class="#{menuVar.icon}"></i> #{menuVar.label}<i class="icon-angle-down Fright"></i>
+						</a>
+						
+						<ul class="layout-menubar-submenu-container" role="menu">
+							<c:forEach var="submenu" items="#{menuVar.submenus}">
+								<li>
+									<h:commandLink binding="#{submenu.link}">
+										<f:actionListener type="mx.com.walmart.fyd.view.ResetViewListener"></f:actionListener>
+									</h:commandLink>
+								</li> 
+							</c:forEach>
+						</ul>
+					</li>
+				</c:forEach> -->
+	
+</ui:composition>

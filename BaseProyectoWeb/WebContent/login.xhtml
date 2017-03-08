@@ -2,28 +2,92 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>LOGIN</title>
+        <meta charset="utf-8"/>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+			<meta name="description" content=""/>
+			<meta name="keywords" content=""/>
+			<meta name="author" content=""/>
+			<link rel="shortcut icon" type="image/x-icon" href="#{facesContext.externalContext.requestContextPath}/image/favicon.ico" />
+			<title>System softmvi</title>
+			<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+			<!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script><![endif]-->
+			<!-- Bootstrap CSS-->
+			<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/app/css/bootstrap.css"/>
+			<!-- Vendor CSS-->
+			<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/vendor/fontawesome/css/font-awesome.min.css"/>
+			<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/vendor/animo/animate+animo.css"/>
+			<!-- App CSS-->
+			<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/app/css/app.css"/>
+			<!-- Modernizr JS Script-->
+			<script src="#{facesContext.externalContext.requestContextPath}/vendor/modernizr/modernizr.js" type="application/javascript"></script>
+			<!-- FastClick for mobiles-->
+			<script src="#{facesContext.externalContext.requestContextPath}/vendor/fastclick/fastclick.js" type="application/javascript"></script>
         <f:metadata>
 		    <f:viewAction action="#{loginView.irPagina}" />
-		    <!-- <f:event type="preRenderView" listener="#{loginView.irPagina}"/> -->
 		</f:metadata>
     </h:head>
-    <h:body onload="document.f.app_username.focus();">
-                <h3>Inicio de sesión</h3>
-                <font color="red">
+    <h:body onload="document.f.app_username.focus();" 
+    style="background: url(#{facesContext.externalContext.requestContextPath}/image/fondo2.jpg)  no-repeat center center fixed;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover; 
+                background-size: 100% 100%;">
+    <div style="height: 100%; padding: 50px 0; " class="row row-table">
+      <div class="col-lg-3 col-md-6 col-sm-8 col-xs-12 align-middle">
+         <!-- START panel-->
+         <div data-toggle="play-animation" data-play="zoomIn" data-offset="0" data-duration="300" class="panel panel-default panel-flat">
+            <p class="text-center mb-lg">
+               <br/>
+               <a href="#">
+                  <img src="#{facesContext.externalContext.requestContextPath}/image/login.png" alt="Image" height="80" width="80" class="block-center img-rounded"/>
+               </a>
+            </p>
+            <p class="text-center mb-lg">
+               <strong>SIGN IN TO CONTINUE.</strong>
+            </p>
+            <div class="panel-body">
+            <font color="red">
 		     <h:outputLabel value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/>
                 </font>
-         
-		<form name="f" action="${request.contextPath}/appLogin" method="POST">
-			<h:outputLabel value="Enter UserName:" />
-			<input type="text" name="app_username"/><br/><br/>
-			<h:outputLabel value="Enter Password:" />
-			<input type="password" name="app_password"/> <br/><br/>
-			<INPUT id="remember_me" name="remember_me" type="checkbox"/>
-			<LABEL for="remember_me" class="inline">Recordarme</LABEL>			
-			<input type="submit" value="Login"/>
+		<form name="f" action="${request.contextPath}/appLogin" method="POST" role="form" class="mb-lg">
+			<div class="text-right mb-sm"><a href="#" class="text-muted">Need to Signup?</a>
+				</div>
+				<div class="form-group has-feedback">
+					<input type="text" name="app_username" placeholder="Enteruser" class="form-control"/>
+				   <span class="fa fa-user form-control-feedback text-muted"></span>
+				</div>
+				<div class="form-group has-feedback">
+					<input type="password" name="app_password" placeholder="Password" class="form-control"/>
+				   <span class="fa fa-lock form-control-feedback text-muted"></span>
+				</div>
+				<div class="clearfix">
+				   <div class="checkbox c-checkbox pull-left mt0">
+				      <label>
+				      	<INPUT id="remember_me" name="remember_me" type="checkbox"/>
+				         <span class="fa fa-check"></span>Remember Me</label>
+				   </div>
+				   <div class="pull-right"><a href="#" class="text-muted">Forgot your password?</a>
+				   </div>
+				</div>			
+			<input type="submit" value="Login" class="btn btn-block btn-primary"/>
 			<h:outputLabel rendered="false">Parte de abajo sirve para evitar xss</h:outputLabel>
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>			
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		</form>
+		</div>
+         </div>
+         <!-- END panel-->
+      </div>
+   </div>
     </h:body>
+    <!-- START Scripts-->
+   <!-- Main vendor Scripts-->
+   <script src="#{facesContext.externalContext.requestContextPath}/vendor/jquery/jquery.min.js"></script>
+   <script src="#{facesContext.externalContext.requestContextPath}/vendor/bootstrap/js/bootstrap.min.js"></script>
+   <!-- Animo-->
+   <script src="#{facesContext.externalContext.requestContextPath}/vendor/animo/animo.min.js"></script>
+   <!-- Custom script for pages-->
+   <script src="#{facesContext.externalContext.requestContextPath}/app/js/pages.js"></script>
+   <!-- END Scripts-->
 </html>  
