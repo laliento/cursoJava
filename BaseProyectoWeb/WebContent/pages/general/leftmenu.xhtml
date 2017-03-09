@@ -66,32 +66,30 @@
                </li>
                <!-- END user info-->
                <!-- START Menu-->
-               <li>
-                  <a href="dashboard.html" title="Dashboard" data-toggle="collapse-next" class="has-submenu">
-                     <em class="fa fa-dashboard"></em>
-                     <div class="label label-primary pull-right">12</div>
-                     <span class="item-text">Dashboard</span>
-                  </a>
-                  <!-- START SubMenu item-->
-                  <ul class="nav collapse ">
-                     <li>
-                        <a href="dashboard.html" title="Default" data-toggle="" class="no-submenu">
-                           <span class="item-text">Default</span>
-                        </a>
-                     </li>
-                     <li>
-                        <a href="dashboard-nosidebar.html" title="No Sidebar" data-toggle="" class="no-submenu">
-                           <span class="item-text">No Sidebar</span>
-                        </a>
-                     </li>
-                     <li>
-                        <a href="dashboard-noprofile.html" title="No Profile" data-toggle="" class="no-submenu">
-                           <span class="item-text">No Profile</span>
-                        </a>
-                     </li>
-                  </ul>
-                  <!-- END SubMenu item-->
-               </li>
+               
+               <c:forEach var="menuVar" items="#{loginView.lstRelPerfilMenu}">
+	               <li>
+	                  <a href="#" title="#{menuVar.catMenu.desc}" data-toggle="collapse-next" class="has-submenu">
+	                     <em class="fa #{menuVar.catMenu.icono}"></em>
+	                     <div class="label label-primary pull-right">#{menuVar.catMenu.subMenus.size()}</div>
+	                     <span class="item-text">#{menuVar.catMenu.desc}</span>
+	                  </a>
+	                  <c:forEach var="submenu" items="#{menuVar.catMenu.subMenus}">
+		                  <ul class="nav collapse ">
+		                     <li>
+		                        <a href="#{facesContext.externalContext.requestContextPath}/#{submenu.url}" title="#{submenu.desc}" data-toggle="" class="no-submenu">
+		                           <em class="fa #{submenu.icono}"></em>#{submenu.desc}
+		                        </a>
+		                     </li>
+		                  </ul>
+	                  </c:forEach>
+	               </li>
+               </c:forEach>
+               
+               
+               
+               
+               
             </ul>
          </nav>
          <!-- END Sidebar (left)-->
