@@ -2,7 +2,6 @@ package com.lalo.base.dao;
 
 import java.util.List;
 
-import org.hibernate.FetchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -18,8 +17,8 @@ public class RelPerfilMenuDaoImpl extends HibernateDaoImpl<RelPerfilMenu, Intege
 
 	@Override
 	public List<RelPerfilMenu> findByPerfil(Perfil perfil) {
-		return currentSession().createCriteria(RelPerfilMenu.class, "rpm").add(Restrictions.eq("rpm.perfil", perfil))
-				.add(Restrictions.isNull("rpm.catMenu.url")).setFetchMode("PayoutHeader", FetchMode.JOIN).list();
+		return currentSession().createCriteria(RelPerfilMenu.class, "rpm").
+				add(Restrictions.eq("rpm.perfil", perfil)).add(Restrictions.eq("rpm.catMenu.menuPadre", null)).list();
 	}
 
 	@Override
