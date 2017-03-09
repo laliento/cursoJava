@@ -76,7 +76,7 @@
 	                  <c:forEach var="submenu" items="#{menuVar.catMenu.subMenus}">
 		                  <ul class="nav collapse ">
 		                     <li>
-		                        <a href="#{facesContext.externalContext.requestContextPath}/#{submenu.url}" title="#{submenu.desc}" data-toggle="" class="no-submenu">
+		                        <a href="#{facesContext.externalContext.requestContextPath}#{submenu.url}" title="#{submenu.desc}" data-toggle="" class="no-submenu">
 		                           <em class="fa #{submenu.icono}"></em>#{submenu.desc}
 		                        </a>
 		                     </li>

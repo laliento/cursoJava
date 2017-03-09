@@ -10,4 +10,6 @@ import com.lalo.config.springHibernate.HibernateDao;
 public interface RelPerfilMenuDao extends HibernateDao<RelPerfilMenu, Integer>{
 	public List<RelPerfilMenu> findByPerfil(Perfil perfil);
 	public List<RelPerfilMenu> findByUsuario(Usuario usuario);
+	public List<RelPerfilMenu> findByUsuarioAndMenuPadre(Usuario usuario,RelPerfilMenu relPerfilMenu);
+	public List<RelPerfilMenu>  findByPerfilAndMenuPadre(Perfil perfil,RelPerfilMenu relPerfilMenu);
 }

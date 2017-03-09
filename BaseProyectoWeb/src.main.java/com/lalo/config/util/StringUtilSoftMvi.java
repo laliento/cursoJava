@@ -9,9 +9,9 @@ import java.util.StringTokenizer;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 
-public final class StringUtilSentinel {
+public final class StringUtilSoftMvi {
 	
-	private StringUtilSentinel(){};
+	private StringUtilSoftMvi(){};
 	public static final Integer INDICE_PALABRAS_REMOVIDA=1;
 	public static final Integer INDICE_PALABRAS_NUEVAS=2;
 	public static final String INDICE_DESCRIPCION="Descripción Actualizada";
@@ -29,7 +29,7 @@ public final class StringUtilSentinel {
 		StringBuffer sb = new StringBuffer();
 		sb.append("");
 		Map<Integer,List<String>> mapaComparacion ;
-		mapaComparacion = StringUtilSentinel.comparaCadenas(actual, nueva);
+		mapaComparacion = StringUtilSoftMvi.comparaCadenas(actual, nueva);
 		for (String palabraCambio : mapaComparacion.get(tipo)) {
 			sb.append(palabraCambio).append(" ");
 		}

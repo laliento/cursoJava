@@ -1,6 +1,8 @@
 package com.lalo.config.view;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lalo.base.dao.RelPerfilMenuDao;
+import com.lalo.base.model.CatMenu;
 import com.lalo.base.model.RelPerfilMenu;
 
 @Component
@@ -26,6 +29,13 @@ public class LoginView extends BackingBean implements ViewMethodDefault{
 			return null;
 		else{
 			lstRelPerfilMenu=relPerfilMenuDao.findByUsuario(getSessionUser());
+			for (RelPerfilMenu relPerfilMenu : lstRelPerfilMenu) {
+				Set<CatMenu> subMenus = new HashSet<CatMenu>();
+				for (RelPerfilMenu relPerfilMenuSub : relPerfilMenuDao.findByUsuarioAndMenuPadre(getSessionUser(),relPerfilMenu)) {
+					subMenus.add(relPerfilMenuSub.getCatMenu());
+				}
+				relPerfilMenu.getCatMenu().setSubMenus(subMenus);
+			}
 			return pagina;
 		}
 	}
