@@ -69,8 +69,7 @@
                
                <c:forEach var="menuVar" items="#{loginView.lstRelPerfilMenu}">
 	               <li>
-	                  <a href="#" title="#{menuVar.catMenu.desc}" data-toggle="collapse-next" class="has-submenu">
-	                     <em class="fa #{menuVar.catMenu.icono}"></em>
+	                  <a href="#" title="#{menuVar.catMenu.desc}" data-toggle="collapse-next" class="fa #{menuVar.catMenu.icono}"">
 	                     <div class="label label-primary pull-right">#{menuVar.catMenu.subMenus.size()}</div>
 	                     <span class="item-text">#{menuVar.catMenu.desc}</span>
 	                  </a>
