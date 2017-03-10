@@ -17,7 +17,7 @@ public class MyPredicate implements Predicate{
 	        this.propertyName = propertyName;
 	        this.expected = expected;
 	    }
-
+//CollectionUtils.exists(itemFileAsociado, new MyPredicate("itemFileProductoId.itemFile.tipoNegocio.storeFormatCode", Integer.valueOf(storeFormatCode))
 	    public boolean evaluate(Object object) {
 	        try {
 	        	
