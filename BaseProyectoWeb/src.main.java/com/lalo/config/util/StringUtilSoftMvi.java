@@ -14,7 +14,7 @@ public final class StringUtilSoftMvi {
 	private StringUtilSoftMvi(){};
 	public static final Integer INDICE_PALABRAS_REMOVIDA=1;
 	public static final Integer INDICE_PALABRAS_NUEVAS=2;
-	public static final String INDICE_DESCRIPCION="Descripción Actualizada";
+	public static final String INDICE_DESCRIPCION="Descripciï¿½n Actualizada";
 	public static final String INDICE_HEADER="Header Actualizado";
 	public static final Integer TIPO_DESCRIPCION=1;
 	public static final Integer TIPO_HEADER=2;
@@ -63,7 +63,7 @@ public final class StringUtilSoftMvi {
 //		for (String string : update) {
 //			System.out.println(string);
 //		}
-//		System.out.println("Añadidos: ");
+//		System.out.println("Aï¿½adidos: ");
 //		for (String string : added) {
 //			System.out.println(string);
 //		}
@@ -88,5 +88,13 @@ public final class StringUtilSoftMvi {
 	public static String html2text(String html) {
 		Jsoup.parse(html).attributes();
 		return Jsoup.parse(html).text();
+	}
+	public static boolean isNumeric(String cadena){
+		try {
+			Integer.parseInt(cadena);
+			return true;
+		} catch (NumberFormatException nfe){
+			return false;
+		}
 	}
 }

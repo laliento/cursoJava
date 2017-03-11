@@ -1,7 +1,7 @@
 package com.lalo.config.util;
 
 public enum Constants {
-	NAME_SYSTEM("Fotos y Descripciones"),
+	NAME_SYSTEM("SoftMvi"),
 	SESSION_USER_kEY("SessionUser"),
 	CONSTANTE_ESTATUS_ACTIVO(Integer.valueOf(1)),
 	CONSTANTE_MAIL_ADMINISTRADOR("mailAdministrador"),
@@ -35,10 +35,10 @@ public enum Constants {
 	EXT_JFI("jfi"),
 	EXT_TXT("txt"),
 //	Monitor Message
-	LOGGER_FATAL_ERROR_MESSAGE("Se envío correo electronico al administrador para notificar una Exception "),
+	LOGGER_FATAL_ERROR_MESSAGE("Se envï¿½o correo electronico al administrador para notificar una Exception "),
 	DETAIL_MAIL_ERROR_MONITOR("El detalle del error es el siguiente: "),
 	SUBJECT_MAIL_ERROR_MONITOR("Error fatal en el aplicativo Fotos y Descripciones"),
-	HEADER_MAIL_ERROR_MONITOR("El proceso de monitoreo de Fotos y Descripciones ha detectado un error que podría comprometer la operación del aplicativo."),
+	HEADER_MAIL_ERROR_MONITOR("El proceso de monitoreo de Fotos y Descripciones ha detectado un error que podrï¿½a comprometer la operaciï¿½n del aplicativo."),
 	CONSIDERATION_MAIL_ERROR_MONITOR("Favor de reportar este incidente al area de Infraestructura."),
 	PROCESS_MAIL_ERROR_MONITOR("Monitoreo de sistema"),
 	TITLE_MAIL_ERROR_MONITOR("Error fatal del sistema Fotos y Descripciones"),
@@ -51,6 +51,9 @@ public enum Constants {
 	EXTRACCION_CHUNK(10000),
 	DEFAULT_CHARSET("UTF-8"),
 	CONSTANTE_CARACTER_PUNTO(".")
+	,
+	LOGATT_MINUTOS_CUENTA_BLOQUEADA(120),
+	LOGATT_NUMERO_INTENTOS_PERMITIDOS(2),
 	;
 	
 	private String string;
