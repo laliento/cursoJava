@@ -1,4 +1,4 @@
-package com.lalo.base.model;
+package com.lalo.config.model;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,7 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
+/**
+ * @author Eduardo Cruz Zamorano
+ *
+ */
 @Entity
 @Table (name="LOGGIN_ATTEMPTS")
 public class LogginAttempts implements Serializable{

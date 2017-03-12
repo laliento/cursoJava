@@ -1,4 +1,4 @@
-package com.lalo.base.model;
+package com.lalo.config.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +11,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
-
+/**
+ * @author Eduardo Cruz Zamorano
+ *
+ */
 @Entity
 @Table(name="ENT_USUARIO")
 public class Usuario {
@@ -29,8 +32,10 @@ public class Usuario {
 	private String apellidoMaterno;
 	@Column(name="CORREO")
 	private String correo;
-	@Column(name="PASSWORD")
-	private char password;
+	@Column(name="PASSWORD",columnDefinition="char(128)")
+	private String password;
+	@Column(name="SALT",columnDefinition="char(128)")
+	private String salt;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_ESTADO_USUARIO", nullable = false)
 	private EstadoUsuario estadoUsuario;
@@ -46,7 +51,7 @@ public class Usuario {
 		this.idUsuario = idUsuario;
 	}
 	public Usuario(String username, String nombre, String apellidoPaterno, String apellidoMaterno, String correo,
-			char password, EstadoUsuario estadoUsuario, Perfil perfil, boolean enable) {
+			String password, String salt, EstadoUsuario estadoUsuario, Perfil perfil, boolean enable) {
 		super();
 		this.username = username;
 		this.nombre = nombre;
@@ -54,6 +59,7 @@ public class Usuario {
 		this.apellidoMaterno = apellidoMaterno;
 		this.correo = correo;
 		this.password = password;
+		this.salt = salt;
 		this.estadoUsuario = estadoUsuario;
 		this.perfil = perfil;
 		this.enable = enable;
@@ -94,10 +100,10 @@ public class Usuario {
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
-	public char getPassword() {
+	public String getPassword() {
 		return password;
 	}
-	public void setPassword(char password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 	public EstadoUsuario getEstadoUsuario() {
@@ -118,11 +124,17 @@ public class Usuario {
 	public void setEnable(boolean enable) {
 		this.enable = enable;
 	}
+	public String getSalt() {
+		return salt;
+	}
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
 	@Override
 	public String toString() {
 		return "Usuario [idUsuario=" + idUsuario + ", username=" + username + ", nombre=" + nombre
 				+ ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", correo=" + correo
-				+ ", password=" + password + ", estadoUsuario=" + estadoUsuario + ", perfil=" + perfil + ", enable="
-				+ enable + "]";
+				+ ", password=" + password + ", salt=" + salt + ", estadoUsuario=" + estadoUsuario + ", perfil="
+				+ perfil + ", enable=" + enable + "]";
 	}
 }

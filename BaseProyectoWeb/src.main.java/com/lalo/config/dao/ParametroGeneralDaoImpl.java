@@ -1,12 +1,15 @@
-package com.lalo.base.dao;
+package com.lalo.config.dao;
 
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import com.lalo.base.model.ParametroGeneral;
+import com.lalo.config.model.ParametroGeneral;
 import com.lalo.config.springHibernate.HibernateDaoImpl;
 import com.lalo.config.util.StringUtilSoftMvi;
-
+/**
+ * @author Eduardo Cruz Zamorano
+ *
+ */
 @Repository
 public class ParametroGeneralDaoImpl extends HibernateDaoImpl<ParametroGeneral, String> implements ParametroGeneralDao{
 

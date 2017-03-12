@@ -1,10 +1,13 @@
 package com.lalo.config.springHibernate;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
-
+/**
+ * @author Eduardo Cruz Zamorano
+ *
+ */
 public class SecurityInitializer extends AbstractSecurityWebApplicationInitializer {
 /*
- ésta clase es lo equivalente en el web.xml a
+ ï¿½sta clase es lo equivalente en el web.xml a
  <filter>
   <filter-name>springSecurityFilterChain</filter-name>
   <filter-class>

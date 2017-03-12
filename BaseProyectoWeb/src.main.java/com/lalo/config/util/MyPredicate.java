@@ -4,7 +4,10 @@ package com.lalo.config.util;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.collections4.Predicate;
-
+/**
+ * @author Eduardo Cruz Zamorano
+ *
+ */
 @SuppressWarnings("rawtypes")
 public class MyPredicate implements Predicate{
 

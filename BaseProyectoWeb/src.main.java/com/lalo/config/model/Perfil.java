@@ -1,4 +1,4 @@
-package com.lalo.base.model;
+package com.lalo.config.model;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,7 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
+/**
+ * @author Eduardo Cruz Zamorano
+ *
+ */
 @Entity
 @Table(name="CAT_PERFIL")
 public class Perfil {

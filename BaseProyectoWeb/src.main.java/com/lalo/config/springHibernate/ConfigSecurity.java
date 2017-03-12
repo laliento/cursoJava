@@ -19,25 +19,23 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationFa
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
-import com.lalo.config.springSecurity.UserNameCachingAuthenticationFailureHandler;
-
+import com.lalo.config.springSecurity.AuthenticationServiceSofMvi;
+import com.lalo.config.springSecurity.UserNameCachingAuthenticationFailureHandlerSoftMvi;
+/**
+ * @author Eduardo Cruz Zamorano
+ *
+ */
 @Configuration
 @EnableWebSecurity
 public class ConfigSecurity extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	DataSource  datasource;
-	
+	@Autowired
+	private AuthenticationServiceSofMvi authenticationServiceSofMvi;
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-		auth.jdbcAuthentication().dataSource(datasource)
-		.usersByUsernameQuery(
-				"select USERNAME,concat(PASSWORD,'|',SALT) AS PASSWORD,ENABLE FROM ENT_USUARIO WHERE USERNAME=?")
-		.authoritiesByUsernameQuery(
-				"SELECT eu.username,cp.descripcion from ENT_USUARIO eu "
-				+ "inner join CAT_PERFIL cp on eu.id_perfil=cp.id_perfil "
-				+ "where eu.username=?")
-		.rolePrefix("ROLE_")
+		auth.userDetailsService(authenticationServiceSofMvi)
 		.passwordEncoder(
 			new BaseDigestPasswordEncoder() {
 				ShaPasswordEncoder shaPasswordEncoder = new ShaPasswordEncoder(512);
@@ -70,12 +68,15 @@ public class ConfigSecurity extends WebSecurityConfigurerAdapter {
 	  }
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
-      http.csrf()//todo va con https excepto
-	      .disable()
-		  .authorizeRequests()
-	      .antMatchers("/css/**","/vendor/**","/app/**", "/fonts/**", "/image/**", "/js/**").permitAll()
-      .and().authorizeRequests()
-        .antMatchers("/", "/home","/resources/**").permitAll() 
+      http
+//      	.csrf()//todo va con https excepto
+//	      .disable()
+      .authorizeRequests()
+        .antMatchers("/", "/home","/resources/**").authenticated()
+      	//internos una vez autenticado
+      	.antMatchers("/css/**","/images/**", "/js/**").authenticated()
+      	//publicos
+      	.antMatchers("/login.xhtml","/vendor/**","/app/**", "/image/**").permitAll()
         .antMatchers("/pages/admin/**").hasRole("ADMIN") //hasRole a�ade el prefijo _ROLE
         .antMatchers("/pages/caja/**").access("hasRole('ADMIN') OR hasRole('CAJA')")
         .antMatchers("/pages/mesero/**").access("hasRole('ADMIN') OR hasRole('MESERO')")
@@ -117,7 +118,7 @@ public class ConfigSecurity extends WebSecurityConfigurerAdapter {
     }
 	@Bean
 	public SimpleUrlAuthenticationFailureHandler simpleUrlAuthenticationFailureHandler(){
-		return new UserNameCachingAuthenticationFailureHandler();
+		return new UserNameCachingAuthenticationFailureHandlerSoftMvi();
 	}
 	@Bean
     public PersistentTokenRepository persistentTokenRepository() {

@@ -8,7 +8,10 @@ import java.util.StringTokenizer;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
-
+/**
+ * @author Eduardo Cruz Zamorano
+ *
+ */
 public final class StringUtilSoftMvi {
 	
 	private StringUtilSoftMvi(){};

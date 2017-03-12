@@ -10,10 +10,13 @@ import javax.faces.bean.SessionScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.lalo.base.dao.RelPerfilMenuDao;
-import com.lalo.base.model.CatMenu;
-import com.lalo.base.model.RelPerfilMenu;
-
+import com.lalo.config.dao.RelPerfilMenuDao;
+import com.lalo.config.model.CatMenu;
+import com.lalo.config.model.RelPerfilMenu;
+/**
+ * @author Eduardo Cruz Zamorano
+ *
+ */
 @Component
 @SessionScoped
 @ManagedBean(name="loginView")

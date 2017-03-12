@@ -1,4 +1,4 @@
-package com.lalo.base.view.menuPadre1;
+package com.lalo.app.view;
 
 import java.util.List;
 
@@ -8,16 +8,15 @@ import javax.faces.bean.SessionScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.lalo.base.dao.RelPerfilMenuDao;
-import com.lalo.base.dao.UsuarioDao;
-import com.lalo.base.model.RelPerfilMenu;
-import com.lalo.base.model.Usuario;
+import com.lalo.config.dao.RelPerfilMenuDao;
+import com.lalo.config.dao.UsuarioDao;
+import com.lalo.config.model.RelPerfilMenu;
+import com.lalo.config.model.Usuario;
 import com.lalo.config.view.BackingBean;
 import com.lalo.config.view.ViewMethodDefault;
 
 
 @Component
-//@ManagedBean(name="pruebaView")
 @SessionScoped
 public class PruebaView extends BackingBean implements ViewMethodDefault{
 	/**

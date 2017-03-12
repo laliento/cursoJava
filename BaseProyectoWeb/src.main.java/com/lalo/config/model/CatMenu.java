@@ -1,4 +1,4 @@
-package com.lalo.base.model;
+package com.lalo.config.model;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -14,7 +14,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
+/**
+ * @author Eduardo Cruz Zamorano
+ *
+ */
 @Entity
 @Table(name="CAT_MENU")
 public class CatMenu implements Serializable{

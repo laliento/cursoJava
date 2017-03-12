@@ -18,9 +18,12 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import com.lalo.base.dao.UsuarioDao;
-import com.lalo.base.model.Usuario;
-
+import com.lalo.config.dao.UsuarioDao;
+import com.lalo.config.model.Usuario;
+/**
+ * @author Eduardo Cruz Zamorano
+ *
+ */
 @Component
 public class BackingBean implements Serializable{
 	

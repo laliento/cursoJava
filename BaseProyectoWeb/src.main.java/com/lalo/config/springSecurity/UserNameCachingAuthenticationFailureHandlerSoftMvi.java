@@ -12,19 +12,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AccountStatusException;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
+import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 
-import com.lalo.base.dao.LogginAttemptsDao;
-import com.lalo.base.dao.ParametroGeneralDao;
-import com.lalo.base.dao.UsuarioDao;
-import com.lalo.base.model.LogginAttempts;
-import com.lalo.base.model.Usuario;
-
+import com.lalo.config.dao.LogginAttemptsDao;
+import com.lalo.config.dao.ParametroGeneralDao;
+import com.lalo.config.dao.UsuarioDao;
+import com.lalo.config.model.LogginAttempts;
+import com.lalo.config.model.Usuario;
+/**
+ * @author Eduardo Cruz Zamorano
+ *
+ */
 @Component
-public class UserNameCachingAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
+public class UserNameCachingAuthenticationFailureHandlerSoftMvi extends SimpleUrlAuthenticationFailureHandler {
 	/*
 	 * Variabes independientes 
 	 */
@@ -40,7 +45,7 @@ public class UserNameCachingAuthenticationFailureHandler extends SimpleUrlAuthen
 	private LogginAttemptsDao logginAttemptsDao;
 	@Autowired
 	private ParametroGeneralDao parametroGeneralDao; 
-	public UserNameCachingAuthenticationFailureHandler(){super("/login.xhtml?error=BadCredentials");}
+	public UserNameCachingAuthenticationFailureHandlerSoftMvi(){super("/login.xhtml?error=BadCredentials");}
     @Override
     public void onAuthenticationFailure(
             HttpServletRequest request, HttpServletResponse response,
@@ -53,10 +58,12 @@ public class UserNameCachingAuthenticationFailureHandler extends SimpleUrlAuthen
     	String mensajeRegreso="";
     	if(exception instanceof BadCredentialsException){
     		mensajeRegreso = evitaFuerzaBruta(request);
+    	}else if (exception instanceof LockedException){
+    		mensajeRegreso = "Su cuenta se encuentra desabilitada temporalmente.";
+    	}else if(exception instanceof UsernameNotFoundException || exception instanceof InternalAuthenticationServiceException){
+    		mensajeRegreso = "Usuario no registrado.";
     	}else if (exception instanceof AccountStatusException){
     		mensajeRegreso = "Su cuenta se encuentra desabilitada.";
-    	}else if(exception instanceof UsernameNotFoundException){
-    		mensajeRegreso = "Username Not Found.";
     	}
     	AuthenticationException authenticationException = new AuthenticationException(mensajeRegreso) {
 			private static final long serialVersionUID = 1L;};
@@ -76,6 +83,9 @@ public class UserNameCachingAuthenticationFailureHandler extends SimpleUrlAuthen
 				else{
 					numeroDeIntentos++;
 					mensajeRegreso = "Intento fallido "+numeroDeIntentos+" de "+intentosPermitidosLoggin+" intentos permitidos.";
+					if(superaNumeroIntentos(numeroDeIntentos,intentosPermitidosLoggin)){
+						mensajeRegreso += "\nCuenta bloquedada temporalmente por "+minutosCuentaBloqueada+" minutos.";
+					}
 					guardaNuevoIntentoFallido(usuario);
 				}
 			}else

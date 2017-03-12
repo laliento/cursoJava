@@ -1,5 +1,8 @@
 package com.lalo.config.springHibernate;
-
+/**
+ * @author Eduardo Cruz Zamorano
+ *
+ */
 import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +25,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @PropertySource("classpath:/com/lalo/config/properties/database.properties")
-@ComponentScan(basePackages = {"com.lalo.base.view","com.lalo.base.bi","com.lalo.base.dao","com.lalo.config.view","com.lalo.config.springSecurity"})// por default toma el paquete donde est� ubicada �sta clase
+@ComponentScan(basePackages = {
+		"com.lalo.app.view","com.lalo.app.bi","com.lalo.app.dao",//referente al tipo de aplicacion
+		"com.lalo.config.view","com.lalo.config.dao",//referente a la configuración del sistema
+		"com.lalo.config.springSecurity"
+		})// por default toma el paquete donde est� ubicada �sta clase
 @EnableTransactionManagement
 public class ConfigSpring {
 	@Autowired
@@ -63,8 +70,8 @@ public class ConfigSpring {
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(DataSource());
-		//para la persistencia de hibernet no de spring com.lalo.base.model Objetos anotados con Hibernate/JPA
-		sessionFactory.setPackagesToScan(new String[] { "com.lalo.base.model"});
+		//para la persistencia de hibernet no de spring Objetos anotados con Hibernate/JPA
+		sessionFactory.setPackagesToScan(new String[] {"com.lalo.config.model","com.lalo.app.model"});
 		sessionFactory.setHibernateProperties(hibernateProperties());
 		return sessionFactory;
 	}

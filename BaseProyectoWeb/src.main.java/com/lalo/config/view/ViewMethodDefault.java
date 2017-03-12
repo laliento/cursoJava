@@ -1,10 +1,13 @@
 package com.lalo.config.view;
 
-
+/**
+ * @author Eduardo Cruz Zamorano
+ *
+ */
 public interface ViewMethodDefault {
 
 	/*
-	 * Métodos para ininicializar página
+	 * Mï¿½todos para ininicializar pï¿½gina
 	 */
 	void initPage();
 	String irPagina();

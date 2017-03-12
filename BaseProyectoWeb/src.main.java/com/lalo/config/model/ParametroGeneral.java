@@ -1,4 +1,4 @@
-package com.lalo.base.model;
+package com.lalo.config.model;
 
 import java.io.Serializable;
 
@@ -6,7 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
+/**
+ * @author Eduardo Cruz Zamorano
+ *
+ */
 @Entity
 @Table(name="PARAMETRO_GENERAL")
 public class ParametroGeneral implements Serializable{

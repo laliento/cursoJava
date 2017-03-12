@@ -1,8 +1,11 @@
-package com.lalo.base.dao;
+package com.lalo.config.dao;
 
-import com.lalo.base.model.ParametroGeneral;
+import com.lalo.config.model.ParametroGeneral;
 import com.lalo.config.springHibernate.HibernateDao;
-
+/**
+ * @author Eduardo Cruz Zamorano
+ *
+ */
 public interface ParametroGeneralDao extends HibernateDao<ParametroGeneral, String>{
 	
 	public ParametroGeneral findByClave(String clave);

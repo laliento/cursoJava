@@ -1,5 +1,8 @@
 package com.lalo.config.util;
-
+/**
+ * @author Eduardo Cruz Zamorano
+ *
+ */
 public enum Constants {
 	NAME_SYSTEM("SoftMvi"),
 	SESSION_USER_kEY("SessionUser"),

@@ -1,4 +1,4 @@
-package com.lalo.base.dao;
+package com.lalo.config.dao;
 
 import java.util.List;
 
@@ -6,12 +6,15 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import com.lalo.base.model.Perfil;
-import com.lalo.base.model.RelPerfilMenu;
-import com.lalo.base.model.Usuario;
+import com.lalo.config.model.Perfil;
+import com.lalo.config.model.RelPerfilMenu;
+import com.lalo.config.model.Usuario;
 import com.lalo.config.springHibernate.HibernateDaoImpl;
 
-
+/**
+ * @author Eduardo Cruz Zamorano
+ *
+ */
 @SuppressWarnings("unchecked")
 @Repository
 public class RelPerfilMenuDaoImpl extends HibernateDaoImpl<RelPerfilMenu, Integer> implements RelPerfilMenuDao{

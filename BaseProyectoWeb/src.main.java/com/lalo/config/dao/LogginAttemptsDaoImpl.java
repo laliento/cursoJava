@@ -1,5 +1,8 @@
-package com.lalo.base.dao;
-
+package com.lalo.config.dao;
+/**
+ * @author Eduardo Cruz Zamorano
+ *
+ */
 import java.util.Calendar;
 import java.util.Date;
 
@@ -7,8 +10,8 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import com.lalo.base.model.LogginAttempts;
-import com.lalo.base.model.Usuario;
+import com.lalo.config.model.LogginAttempts;
+import com.lalo.config.model.Usuario;
 import com.lalo.config.springHibernate.HibernateDaoImpl;
 @Repository
 public class LogginAttemptsDaoImpl extends HibernateDaoImpl<LogginAttempts, Integer> implements LogginAttemptsDao{
