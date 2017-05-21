@@ -124,10 +124,20 @@
 		</dependency>
 		<!-- Primefaces Version 5 -->
 		<dependency>
-			<groupId>org.primefaces</groupId>
-			<artifactId>primefaces</artifactId>
-			<version>5.0</version>
+		    <groupId>org.primefaces</groupId>
+		    <artifactId>primefaces</artifactId>
+		    <version>6.1</version>
 		</dependency>
+		<!-- <dependency>
+		    <groupId>org.primefaces.extensions</groupId>
+		    <artifactId>primefaces-extensions</artifactId>
+		    <version>3.2.0</version>
+		</dependency> -->
+		
+
+
+
+				
 		<!-- JSP Library -->
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
